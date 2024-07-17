@@ -3,7 +3,6 @@ import enums.TaskType;
 import exception.WrongInputException;
 import utils.Validation;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -142,7 +141,7 @@ class TaskService {
 
     public static void printTaskOnToday(LocalDate ld) {
         long numOfTasks = taskList.stream()
-                .filter(t -> t.isActive())
+                .filter(Task::isActive)
                 .peek(t -> System.out.println("*********** Tasks for today ***********\n" + t))
                 .count();
         if (numOfTasks == 0) System.out.println("There is no task for today");
@@ -180,14 +179,14 @@ class TaskService {
     }
 
     public static void printRemoved() {
-        if (removedTasks.size() == 0) System.out.println("There is no removed task");
+        if (removedTasks.isEmpty()) System.out.println("There is no removed task");
         for (Task t : removedTasks) {
             System.out.println(t);
         }
     }
 
     public static LocalDateTime insertDateTime() {
-        LocalDateTime ldt = LocalDateTime.of(1111, 11, 11, 11, 11); //Как обойтись без инициализации?
+        LocalDateTime ldt = LocalDateTime.now();
         try {
             System.out.print("Type the date in format dd.MM.yyyy HH:mm: ");
             String str = scanner.nextLine();
@@ -201,7 +200,7 @@ class TaskService {
     }
 
     public static LocalDate insertDate() {
-        LocalDate ld = LocalDate.of(1111, 11, 11); //Как обойтись без инициализации?
+        LocalDate ld = LocalDate.now();
         try {
             System.out.print("Type the date in format dd.MM.yyyy: ");
             String str = scanner.nextLine();

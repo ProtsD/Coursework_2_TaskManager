@@ -86,7 +86,7 @@ public class Task {
     }
 
     public LocalDateTime nextDate() {
-        LocalDateTime ldt = LocalDateTime.of(1111, 11, 11, 11, 11); //Как обойтись без инициализации?
+        LocalDateTime ldt = LocalDateTime.now();
         switch (periodicity) {
             case DAILY -> ldt = dateTime.plusDays(1);
             case WEEKLY -> ldt = dateTime.plusWeeks(1);
